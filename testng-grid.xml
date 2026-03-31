@@ -7,11 +7,22 @@
             <class name="vn.ktpm.lab11.tests.SmokeLoginPageTest"/>
         </classes>
     </test>
+    <test name="Chrome Login With Secret">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="vn.ktpm.lab11.tests.LoginWithSecretTest"/>
+        </classes>
+    </test>
     <test name="Firefox Smoke">
         <parameter name="browser" value="firefox"/>
         <classes>
             <class name="vn.ktpm.lab11.tests.SmokeLoginPageTest"/>
         </classes>
     </test>
+    <test name="Firefox Login With Secret">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="vn.ktpm.lab11.tests.LoginWithSecretTest"/>
+        </classes>
+    </test>
 </suite>
-

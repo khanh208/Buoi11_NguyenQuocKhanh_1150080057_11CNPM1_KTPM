@@ -16,6 +16,7 @@ public class LoginPage {
     private final By passwordInput = By.id("password");
     private final By loginButton = By.id("login-button");
     private final By loginLogo = By.className("login_logo");
+    private final By errorMessage = By.cssSelector("[data-test='error']");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -28,6 +29,14 @@ public class LoginPage {
 
     public boolean isLoaded() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(loginLogo)).isDisplayed();
+    }
+
+    public boolean isUsernameInputVisible() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(usernameInput)).isDisplayed();
+    }
+
+    public boolean isPasswordInputVisible() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(passwordInput)).isDisplayed();
     }
 
     public void enterUsername(String username) {
@@ -54,5 +63,9 @@ public class LoginPage {
 
     public boolean isLoginButtonVisible() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(loginButton)).isDisplayed();
+    }
+
+    public String getErrorMessage() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage)).getText().trim();
     }
 }

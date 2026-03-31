@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Lab11 Performance Grid 4 Threads Suite" parallel="methods" thread-count="4">
+    <test name="Login Performance Grid 4 Threads">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="vn.ktpm.lab11.tests.LoginPerformanceTest"/>
+        </classes>
+    </test>
+</suite>
