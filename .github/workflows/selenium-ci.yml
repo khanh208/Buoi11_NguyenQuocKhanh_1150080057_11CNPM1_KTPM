@@ -12,10 +12,16 @@ on:
 
 jobs:
   run-tests:
-    name: Smoke tests on Chrome
+    name: Smoke tests (${{ matrix.browser }})
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        browser:
+          - chrome
+          - firefox
 
     steps:
       - name: Checkout source
@@ -28,17 +34,16 @@ jobs:
           java-version: '17'
           cache: maven
 
-      - name: Run smoke suite
-        run: mvn -B clean test -Dbrowser=chrome -DsuiteXmlFile=testng-smoke.xml
+      - name: Run smoke suite on ${{ matrix.browser }}
+        run: mvn -B clean test -Dbrowser=${{ matrix.browser }} -DsuiteXmlFile=testng-smoke.xml
 
       - name: Upload test evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-artifacts-chrome
+          name: test-results-${{ matrix.browser }}
           path: |
             target/surefire-reports/
             target/screenshots/
           if-no-files-found: warn
           retention-days: 30
-

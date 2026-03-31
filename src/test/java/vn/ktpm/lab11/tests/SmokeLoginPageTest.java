@@ -17,7 +17,7 @@ public class SmokeLoginPageTest extends BaseTest {
         Assert.assertTrue(loginPage.isLoginButtonVisible(), "Nut Login phai hien thi");
     }
 
-    @Test(description = "Lab 1 fail demo: assertion sai co y de chup log do tren GitHub Actions")
+    @Test(description = "Lab 1 fail demo: assertion sai co y de chup log do tren GitHub Actions", enabled = false)
     public void shouldFailIntentionallyForLab1Evidence() {
         LoginPage loginPage = new LoginPage(driver());
 

@@ -22,7 +22,7 @@ mvn -B clean test "-Dbrowser=firefox" "-DsuiteXmlFile=testng-smoke.xml"
 
 ## Automation
 
-Moi lan push len `main` hoac `develop`, GitHub Actions se tu dong chay smoke test.
+Moi lan push len `main` hoac `develop`, GitHub Actions se tu dong chay smoke test song song tren Chrome va Firefox.
 
 ## Tai lieu huong dan
 

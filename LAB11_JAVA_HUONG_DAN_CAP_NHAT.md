@@ -107,7 +107,7 @@ Cho Chrome va Firefox chay song song tren GitHub Actions de giam thoi gian CI.
 
 ### Cach sua workflow
 
-Thay job hien tai bang matrix:
+Da cap nhat workflow sang matrix:
 
 ```yaml
 jobs:
@@ -132,7 +132,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-artifacts-${{ matrix.browser }}
+          name: test-results-${{ matrix.browser }}
           path: |
             target/surefire-reports/
             target/screenshots/
@@ -142,6 +142,36 @@ jobs:
 
 - `fail-fast: false` de Firefox van chay du Chrome fail.
 - `DriverFactory` cua project da ho tro Firefox headless.
+- Artifact da tach rieng thanh `test-results-chrome` va `test-results-firefox`.
+
+### Cach chup man hinh bai 2
+
+1. Push code len GitHub.
+2. Mo tab `Actions`.
+3. Chon workflow run moi nhat.
+4. Chup man hinh khi thay 2 job `Smoke tests (chrome)` va `Smoke tests (firefox)` chay cung luc.
+
+### Cach so sanh thoi gian tuan tu vs song song
+
+`Chay tuan tu`
+
+- Tam thoi sua workflow bo `strategy.matrix`.
+- Chay lan 1 voi `-Dbrowser=chrome`.
+- Chay lan 2 voi `-Dbrowser=firefox`.
+- Cong tong thoi gian 2 lan lai.
+
+`Chay song song`
+
+- Dung workflow matrix hien tai.
+- Lay tong thoi gian cua 1 workflow run co 2 job song song.
+
+`Mau bang ghi ket qua`
+
+| Cau hinh | Thoi gian | Ghi chu |
+|---|---:|---|
+| Tuan tu | ... giay | Chrome xong roi Firefox |
+| Song song matrix | ... giay | Chrome va Firefox cung luc |
+| Tiet kiem | ... giay | Nhanh hon ...% |
 
 ## Bai 3 - GitHub Secrets bao mat credential
 
