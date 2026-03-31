@@ -1,0 +1,9 @@
+target/
+.m2/
+.idea/
+.vscode/
+*.iml
+screenshots/
+.env
+*.log
+__tmp_lab11_copy.docx
