@@ -16,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    env:
+      APP_USERNAME: ${{ secrets.SAUCEDEMO_USERNAME }}
+      APP_PASSWORD: ${{ secrets.SAUCEDEMO_PASSWORD }}
     strategy:
       fail-fast: false
       matrix:

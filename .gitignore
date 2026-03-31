@@ -5,5 +5,6 @@ target/
 *.iml
 screenshots/
 .env
+local.properties
 *.log
 __tmp_lab11_copy.docx

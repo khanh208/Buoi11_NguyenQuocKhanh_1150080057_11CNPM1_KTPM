@@ -46,8 +46,13 @@ public class LoginPage {
         wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
     }
 
+    public void loginAs(String username, String password) {
+        enterUsername(username);
+        enterPassword(password);
+        clickLogin();
+    }
+
     public boolean isLoginButtonVisible() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(loginButton)).isDisplayed();
     }
 }
-

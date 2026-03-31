@@ -13,7 +13,7 @@ public final class TestConfig {
     }
 
     public static String getBaseUrl() {
-        return System.getProperty("baseUrl", DEFAULT_BASE_URL);
+        return readValue("BASE_URL", "base.url", DEFAULT_BASE_URL);
     }
 
     public static String getGridUrl() {
@@ -27,5 +27,12 @@ public final class TestConfig {
     public static boolean isHeadless() {
         return Boolean.parseBoolean(System.getProperty("headless", String.valueOf(isCi())));
     }
-}
 
+    private static String readValue(String envName, String propertyName, String defaultValue) {
+        String envValue = System.getenv(envName);
+        if (envValue != null && !envValue.isBlank()) {
+            return envValue;
+        }
+        return ConfigReader.getProperty(propertyName, defaultValue);
+    }
+}

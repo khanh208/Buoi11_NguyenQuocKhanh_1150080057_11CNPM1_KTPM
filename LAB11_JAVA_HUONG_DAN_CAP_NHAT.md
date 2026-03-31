@@ -187,42 +187,52 @@ Khong hardcode username va password trong source code.
 ### Them vao workflow
 
 ```yaml
-      - name: Run login test
-        run: mvn -B clean test -Dbrowser=chrome -DsuiteXmlFile=testng-smoke.xml
-        env:
-          APP_USERNAME: ${{ secrets.SAUCEDEMO_USERNAME }}
-          APP_PASSWORD: ${{ secrets.SAUCEDEMO_PASSWORD }}
+jobs:
+  run-tests:
+    env:
+      APP_USERNAME: ${{ secrets.SAUCEDEMO_USERNAME }}
+      APP_PASSWORD: ${{ secrets.SAUCEDEMO_PASSWORD }}
 ```
 
 ### Mau Java cap nhat
 
 ```java
-public final class SecretConfig {
-    private SecretConfig() {
+public final class CredentialConfig {
+    private CredentialConfig() {
     }
 
     public static String getUsername() {
-        return readValue("APP_USERNAME", "standard_user");
+        return readValue("APP_USERNAME", "app.username");
     }
 
     public static String getPassword() {
-        return readValue("APP_PASSWORD", "");
+        return readValue("APP_PASSWORD", "app.password");
     }
 
-    private static String readValue(String envName, String fallback) {
-        String value = System.getenv(envName);
-        return value == null || value.isBlank() ? fallback : value;
+    private static String readValue(String envName, String propertyName) {
+        String envValue = System.getenv(envName);
+        if (envValue != null && !envValue.isBlank()) {
+            return envValue;
+        }
+        return ConfigReader.getProperty(propertyName, "");
     }
 }
 ```
 
+Trong project hien tai:
+
+- Java doc secret trong `System.getenv()` truoc qua `CredentialConfig`.
+- Neu local chua set env, code fallback qua file `local.properties`.
+- File mau la `local.properties.example`, file that `local.properties` da duoc dua vao `.gitignore`.
+
 ### Kiem tra nhanh
 
 ```bash
-rg "secret_sauce|standard_user" src
+rg "secret_sauce" src
+rg "standard_user" src/main
 ```
 
-Ket qua mong doi: khong co password that trong source.
+Ket qua mong doi: khong co credential hardcode trong source.
 
 ## Bai 4 - Selenium Grid voi Docker
 
