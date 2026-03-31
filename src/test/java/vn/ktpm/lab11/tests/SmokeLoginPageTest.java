@@ -16,5 +16,14 @@ public class SmokeLoginPageTest extends BaseTest {
         Assert.assertTrue(loginPage.isLoaded(), "Logo dang nhap phai hien thi");
         Assert.assertTrue(loginPage.isLoginButtonVisible(), "Nut Login phai hien thi");
     }
-}
 
+    @Test(description = "Lab 1 fail demo: assertion sai co y de chup log do tren GitHub Actions")
+    public void shouldFailIntentionallyForLab1Evidence() {
+        LoginPage loginPage = new LoginPage(driver());
+
+        loginPage.open(baseUrl());
+
+        Assert.assertTrue(loginPage.isLoaded(), "Logo dang nhap phai hien thi");
+        Assert.assertTrue(false, "Fail co y de minh hoa pipeline mau do cho Bai 1");
+    }
+}
